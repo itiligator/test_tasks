@@ -12,6 +12,7 @@ public:
     [[nodiscard]] int size() const;
     void NextStep();
     int PrintToConsole();
+    ~LifeBoard();
 
 private:
     unsigned *storage;

@@ -64,7 +64,7 @@ void LifeBoard::NextStep() {
             if (LifeBoard::GetCellFromStorage(i+1, j)){++sum;}
             if (LifeBoard::GetCellFromStorage(i+1, j+1)){++sum;}
             if (LifeBoard::GetCellFromStorage(i, j)){
-                if (1==sum || sum>3) {
+                if (1>=sum || sum>3) {
                     LifeBoard::ToggleCellInCalculated(i, j);
                 }
             }
@@ -105,14 +105,16 @@ void LifeBoard::ToggleCellInCalculated(int N, int M) {
 }
 
 int LifeBoard::PrintToConsole() {
-    std::cout << std::endl;
     char c;
+    std::string line (LifeBoard::sz * 2 + 1, 'x');
     for (int i=0; i<LifeBoard::sz; i++){
         for (int j=0; j<LifeBoard::sz; j++){
-            c = LifeBoard::GetCellFromStorage(i, j) ? 'x': '-';
-            std::cout << c << ' ';
+            c = LifeBoard::GetCellFromStorage(i, j) ? 'x': '.';
+            line[2*j] = c;
+            line[2*j+1] = ' ';
         }
-        std::cout << std::endl;
+        line[LifeBoard::sz * 2] = '\n';
+        std::cout << line;
     }
     std::cout << std::endl;
     return 0;
@@ -123,4 +125,9 @@ void LifeBoard::CopyCalculatedToStorage() {
         LifeBoard::storage[i] = LifeBoard::calculated[i];
     }
 
+}
+
+LifeBoard::~LifeBoard() {
+    delete[] LifeBoard::storage;
+    delete[] LifeBoard::calculated;
 }

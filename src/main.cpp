@@ -12,7 +12,7 @@ int main() {
         system("cls");
         lb.PrintToConsole();
         lb.NextStep();
-        sleep_for(200ms);
+        sleep_for(150ms);
     }
     return 0;
 }
